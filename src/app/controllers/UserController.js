@@ -37,7 +37,35 @@ class UserController {
   }
 
   async update(req, res) {
-    return res.json();
+    const { email, oldPassword } = req.body;
+
+    const user = await User.findByPk(req.params.id);
+
+    if (!user) {
+      return res.status(401).json({ error: 'Usuário não encontrado.' });
+    }
+
+    if (email !== user.email) {
+      const userExists = await User.findOne({
+        where: { email },
+      });
+
+      if (userExists) {
+        return res.status(401).json({ error: 'Usuário já existente.' });
+      }
+    }
+
+    if (oldPassword && !(await user.checkPassword(oldPassword))) {
+      return res.status(401).json({ error: 'As senhas não conferem' });
+    }
+
+    const { id, name, avatar_url } = await user.update(req.body);
+
+    return res.json({
+      id,
+      name,
+      avatar_url,
+    });
   }
 }
 
