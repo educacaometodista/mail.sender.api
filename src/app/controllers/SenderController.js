@@ -56,7 +56,29 @@ class SenderController {
   }
 
   async delete(req, res) {
-    return res.json();
+    const sender = await Sender.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (!sender) {
+      return res.status(400).json({ error: 'Remetente não encontrado.' });
+    }
+
+    await sender.destroy();
+
+    const allSenders = await Sender.findAll({
+      attributes: ['id', 'name', 'email'],
+    });
+
+    return res.json(allSenders);
+  }
+
+  async index(req, res) {
+    const sender = await Sender.findAll({
+      attributes: ['id', 'name', 'email'],
+    });
+
+    return res.json(sender);
   }
 }
 
