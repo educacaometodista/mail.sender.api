@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
       },
       avatar_url: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       created_at: {
