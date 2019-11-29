@@ -75,7 +75,7 @@ class UserController {
     }
 
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
-      return res.status(401).json({ error: 'As senhas não conferem' });
+      return res.status(401).json({ error: 'Senha atual inválida.' });
     }
 
     const { id, name, avatar_url } = await user.update(req.body);
@@ -85,6 +85,26 @@ class UserController {
       name,
       avatar_url,
     });
+  }
+
+  async delete(req, res) {
+    const user = await User.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ error: 'Usuário já excluído ou inexistente.' });
+    }
+
+    await user.destroy();
+
+    const allUsers = await User.findAll({
+      attributes: ['id', 'name', 'email', 'avatar_url'],
+    });
+
+    return res.json(allUsers);
   }
 }
 
