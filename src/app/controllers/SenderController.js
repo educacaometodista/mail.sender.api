@@ -36,7 +36,23 @@ class SenderController {
   }
 
   async update(req, res) {
-    return res.json();
+    const schema = Yup.object().shape({
+      name: Yup.string(),
+      email: Yup.string().email(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Falha na validação' });
+    }
+
+    const sender = await Sender.findOne({
+      where: { id: req.params.id },
+      attributes: ['id', 'name', 'email'],
+    });
+
+    await sender.update(req.body);
+
+    return res.json(sender);
   }
 }
 
