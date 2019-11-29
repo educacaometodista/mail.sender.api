@@ -19,5 +19,7 @@ routes.get('/users', UserController.index);
 
 routes.post('/senders', SenderController.store);
 routes.put('/senders/:id', SenderController.update);
+routes.delete('/senders/:id', SenderController.delete);
+routes.get('/senders', SenderController.index);
 
 export default routes;

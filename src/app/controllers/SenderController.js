@@ -54,6 +54,10 @@ class SenderController {
 
     return res.json(sender);
   }
+
+  async delete(req, res) {
+    return res.json();
+  }
 }
 
 export default new SenderController();
