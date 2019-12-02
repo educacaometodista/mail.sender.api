@@ -11,7 +11,7 @@ module.exports = {
           email: process.env.LEONARDO_MAIL,
           password_hash: bcrypt.hashSync(
             process.env.NODE_ENV === 'development'
-              ? process.env.DEFAULT_PASS
+              ? 'admin'
               : process.env.FERNANDO_PASS,
             8
           ),
@@ -26,7 +26,7 @@ module.exports = {
           email: process.env.ERICK_MAIL,
           password_hash: bcrypt.hashSync(
             process.env.NODE_ENV === 'development'
-              ? process.env.DEFAULT_PASS
+              ? 'admin'
               : process.env.FERNANDO_PASS,
             8
           ),
@@ -41,7 +41,7 @@ module.exports = {
           email: process.env.THIAGO_MAIL,
           password_hash: bcrypt.hashSync(
             process.env.NODE_ENV === 'development'
-              ? process.env.DEFAULT_PASS
+              ? 'admin'
               : process.env.FERNANDO_PASS,
             8
           ),
@@ -56,7 +56,7 @@ module.exports = {
           email: process.env.FERNANDO_MAIL,
           password_hash: bcrypt.hashSync(
             process.env.NODE_ENV === 'development'
-              ? process.env.DEFAULT_PASS
+              ? 'admin'
               : process.env.FERNANDO_PASS,
             8
           ),
