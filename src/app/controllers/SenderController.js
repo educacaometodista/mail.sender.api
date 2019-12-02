@@ -14,7 +14,7 @@ class SenderController {
       return res.status(401).json({ error: 'Falha na validação' });
     }
 
-    const { name, email } = req.body;
+    const { name, email, initials } = req.body;
 
     const senderExists = await Sender.findOne({
       where: { email },
@@ -27,11 +27,13 @@ class SenderController {
     await Sender.create({
       name,
       email,
+      initials,
     });
 
     return res.json({
       name,
       email,
+      initials,
     });
   }
 
