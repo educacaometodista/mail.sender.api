@@ -1,7 +1,8 @@
 import Bee from 'bee-queue';
+import SendMail from '../app/jobs/SendMail';
 import redisConfig from '../config/redis';
 
-const jobs = [];
+const jobs = [SendMail];
 
 class Queue {
   constructor() {
@@ -22,15 +23,19 @@ class Queue {
   }
 
   add(queue, job) {
-    return this.queues[queue].bee.createJob(job).save;
+    return this.queues[queue].bee.createJob(job).save();
   }
 
   processQueue() {
     jobs.forEach(job => {
       const { bee, handle } = this.queues[job.key];
 
-      bee.process(handle);
+      bee.on('failed', this.handleFailure).process(handle);
     });
+  }
+
+  handleFailure(job, err) {
+    console.log(`Queue ${job.queue.name}: FAILED`, err);
   }
 }
 
