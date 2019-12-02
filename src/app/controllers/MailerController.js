@@ -2,6 +2,8 @@ import * as Yup from 'yup';
 import Mailer from '../models/Mailer';
 import Sender from '../models/Sender';
 
+import Mail from '../../lib/Mail';
+
 class MailerController {
   async store(req, res) {
     const schema = Yup.object().shape({
@@ -27,6 +29,12 @@ class MailerController {
     if (!senderExists) {
       return res.status(400).json({ error: 'Remetente não encontrado' });
     }
+
+    await Mail.sendMail({
+      to: 'Leonardo Almeida <leonardo.almeida@metodista.br>',
+      subject,
+      text: body,
+    });
 
     await Mailer.create({
       id,
