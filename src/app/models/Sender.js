@@ -15,7 +15,7 @@ class Sender extends Model {
 
     this.addHook('beforeSave', async sender => {
       if (sender.initials) {
-        sender.initials.toLowerCase();
+        sender.initials = await sender.initials.toLowerCase();
       }
     });
 

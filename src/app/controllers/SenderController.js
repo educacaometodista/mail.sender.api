@@ -8,6 +8,7 @@ class SenderController {
       email: Yup.string()
         .email()
         .required(),
+      initials: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -41,6 +42,7 @@ class SenderController {
     const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email(),
+      initials: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -49,8 +51,12 @@ class SenderController {
 
     const sender = await Sender.findOne({
       where: { id: req.params.id },
-      attributes: ['id', 'name', 'email'],
+      attributes: ['id', 'name', 'email', 'initials'],
     });
+
+    if (!sender) {
+      return res.status(400).json({ error: 'Remetente não existente.' });
+    }
 
     await sender.update(req.body);
 
@@ -77,7 +83,7 @@ class SenderController {
 
   async index(req, res) {
     const sender = await Sender.findAll({
-      attributes: ['id', 'name', 'email'],
+      attributes: ['id', 'name', 'email', 'initials'],
     });
 
     return res.json(sender);
