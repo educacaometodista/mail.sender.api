@@ -2,7 +2,8 @@ import * as Yup from 'yup';
 import Mailer from '../models/Mailer';
 import Sender from '../models/Sender';
 
-import Mail from '../../lib/Mail';
+import SendMail from '../jobs/SendMail';
+import Queue from '../../lib/Queue';
 
 class MailerController {
   async store(req, res) {
@@ -32,21 +33,15 @@ class MailerController {
 
     const { title, subtitle, color, ctaText, ctaUrl } = req.body;
 
-    await Mail.sendMail({
-      to: `${sender.name} <${sender.email}>`,
-      from: `${sender.name} <${sender.email}>`,
-      bcc: recipients,
+    await Queue.add(SendMail.key, {
+      sender,
+      recipients,
       subject,
-      template: sender.initials,
-      context: {
-        title,
-        subtitle,
-        topImage: sender.top,
-        mainContent: 'Teste',
-        color,
-        ctaText,
-        ctaUrl,
-      },
+      title,
+      subtitle,
+      color,
+      ctaText,
+      ctaUrl,
     });
 
     await Mailer.create({
