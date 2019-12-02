@@ -15,19 +15,21 @@ class SendMail {
       color,
       ctaText,
       ctaUrl,
+      body,
     } = data;
 
     await Mail.sendMail({
-      to: `${sender.name} <${sender.email}>`,
+      // to: `${sender.name} <${sender.email}>`,
+      to: recipients,
       from: `${sender.name} <${sender.email}>`,
-      bcc: recipients,
+      // bcc: recipients,
       subject,
-      template: sender.initials,
+      template: 'template',
       context: {
         title,
         subtitle,
         topImage: sender.top,
-        mainContent: 'Teste',
+        mainContent: body,
         color,
         ctaText,
         ctaUrl,
