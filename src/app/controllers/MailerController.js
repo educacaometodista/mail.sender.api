@@ -37,7 +37,7 @@ class MailerController {
       from: `${sender.name} <${sender.email}>`,
       bcc: recipients,
       subject,
-      template: 'umesp',
+      template: sender.initials,
       context: {
         title: 'Título',
         subtitle: 'Subtítulo',
