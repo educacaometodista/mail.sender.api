@@ -29,6 +29,10 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: true,
       },
+      recipients: {
+        type: Sequelize.STRING(999999),
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
