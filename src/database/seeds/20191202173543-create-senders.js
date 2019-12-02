@@ -10,6 +10,7 @@ module.exports = {
           initials: 'umesp',
           top:
             'http://portal.metodista.br/msg/institucional/comunicados-2019/novo/template/topo-novo-umesp.jpg',
+          color: '#01549D',
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -20,6 +21,7 @@ module.exports = {
           initials: 'unimep',
           top:
             'http://unimep.edu.br/msg/comunicados/2019/novo/template/topo-novo-unimep.jpg',
+          color: '#d5932f',
           created_at: new Date(),
           updated_at: new Date(),
         },
