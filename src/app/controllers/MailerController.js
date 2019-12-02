@@ -42,6 +42,7 @@ class MailerController {
       color,
       ctaText,
       ctaUrl,
+      body,
     });
 
     await Mailer.create({
