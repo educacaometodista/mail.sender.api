@@ -37,7 +37,13 @@ class MailerController {
       from: `${sender.name} <${sender.email}>`,
       bcc: recipients,
       subject,
-      template: 'test',
+      template: 'umesp',
+      context: {
+        title: 'Título',
+        subtitle: 'Subtítulo',
+        ctaText: 'TEXTO',
+        ctaUrl: 'LINK',
+      },
     });
 
     await Mailer.create({
