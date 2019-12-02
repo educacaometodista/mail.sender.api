@@ -37,7 +37,8 @@ class MailerController {
       from: `${sender.name} <${sender.email}>`,
       bcc: recipients,
       subject,
-      template: sender.initials,
+      template:
+        'http://portal.metodista.br/msg/institucional/comunicados-2019/novo/template',
       context: {
         title,
         subtitle,
