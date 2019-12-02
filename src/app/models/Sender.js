@@ -8,6 +8,7 @@ class Sender extends Model {
         email: Sequelize.STRING,
         initials: Sequelize.STRING,
         top: Sequelize.STRING,
+        color: Sequelize.STRING,
       },
       {
         sequelize,
