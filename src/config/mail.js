@@ -7,6 +7,6 @@ export default {
     pass: process.env.MAIL_PASS,
   },
   default: {
-    from: 'Universidade Metodista de São Paulo <informes@metodista.br>',
+    from: 'Educação Metodista <informes@metodista.br>',
   },
 };
