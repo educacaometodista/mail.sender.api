@@ -41,6 +41,7 @@ class MailerController {
       context: {
         title: 'Título',
         subtitle: 'Subtítulo',
+        color: '#01549D',
         ctaText: 'TEXTO',
         ctaUrl: 'LINK',
       },
