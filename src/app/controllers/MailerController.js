@@ -11,9 +11,7 @@ class MailerController {
       subject: Yup.string()
         .required()
         .min(16),
-      body: Yup.string()
-        .required()
-        .max(9999),
+      body: Yup.string().max(9999),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -32,6 +30,8 @@ class MailerController {
       return res.status(400).json({ error: 'Remetente não encontrado' });
     }
 
+    const { title, subtitle, color, ctaText, ctaUrl } = req.body;
+
     await Mail.sendMail({
       to: `${sender.name} <${sender.email}>`,
       from: `${sender.name} <${sender.email}>`,
@@ -39,11 +39,13 @@ class MailerController {
       subject,
       template: sender.initials,
       context: {
-        title: 'Título',
-        subtitle: 'Subtítulo',
-        color: '#01549D',
-        ctaText: 'TEXTO',
-        ctaUrl: 'LINK',
+        title,
+        subtitle,
+        topImage: sender.top,
+        mainContent: 'Teste',
+        color,
+        ctaText,
+        ctaUrl,
       },
     });
 
