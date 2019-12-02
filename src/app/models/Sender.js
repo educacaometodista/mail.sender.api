@@ -5,8 +5,10 @@ class Sender extends Model {
     super.init(
       {
         name: Sequelize.STRING,
+        provider: Sequelize.STRING,
         email: Sequelize.STRING,
         initials: Sequelize.STRING,
+        top: Sequelize.STRING,
       },
       {
         sequelize,

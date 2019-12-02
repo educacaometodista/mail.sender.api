@@ -1,26 +1,34 @@
-'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+    return queryInterface.bulkInsert(
+      'senders',
+      [
+        {
+          id: 1,
+          name: 'Universidade Metodista de São Paulo',
+          email: 'informes@metodista.br',
+          initials: 'umesp',
+          top:
+            'http://portal.metodista.br/msg/institucional/comunicados-2019/novo/template/topo-novo-umesp.jpg',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: 2,
+          name: 'Universidade Metodista de Piracicaba',
+          email: 'unimep@metodista.br',
+          initials: 'unimep',
+          top:
+            'http://unimep.edu.br/msg/comunicados/2019/novo/template/topo-novo-unimep.jpg',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+      ],
+      {}
+    );
   },
 
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
+  down: queryInterface => {
+    return queryInterface.bulkDelete('senders', null, {});
+  },
 };
