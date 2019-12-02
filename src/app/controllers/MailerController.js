@@ -21,9 +21,21 @@ class MailerController {
 
     const author_id = req.userId;
 
-    const { id, sender_id, subject, body } = req.body;
+    const { id, sender_id, subject, recipients } = req.body;
 
-    const recipients = req.body.recipients.split(/, ;/g).map(r => `${r},`);
+    const {
+      firstContent,
+      secondContent,
+      thirdContent,
+      fourthContent,
+      fifthContent,
+      sixthContent,
+    } = req.body;
+
+    const body = `${firstContent || ''} ${secondContent || ''} ${thirdContent ||
+      ''} ${fourthContent || ''} ${fifthContent || ''} ${sixthContent || ''}`;
+
+    // const recipients = req.body.recipients.split(/, ;/g).map(r => `<${r}>,`);
 
     const sender = await Sender.findByPk(sender_id);
 
@@ -42,7 +54,12 @@ class MailerController {
       color,
       ctaText,
       ctaUrl,
-      body,
+      firstContent,
+      secondContent,
+      thirdContent,
+      fourthContent,
+      fifthContent,
+      sixthContent,
     });
 
     await Mailer.create({
@@ -51,7 +68,7 @@ class MailerController {
       subject,
       body,
       author_id,
-      recipients: 'teste',
+      recipients,
     });
 
     return res.json({
