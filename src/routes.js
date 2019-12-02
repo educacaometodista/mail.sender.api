@@ -3,6 +3,7 @@ import { Router } from 'express';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import SenderController from './app/controllers/SenderController';
+import MailerController from './app/controllers/MailerController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -21,5 +22,7 @@ routes.post('/senders', SenderController.store);
 routes.put('/senders/:id', SenderController.update);
 routes.delete('/senders/:id', SenderController.delete);
 routes.get('/senders', SenderController.index);
+
+routes.post('/mail', MailerController.store);
 
 export default routes;
