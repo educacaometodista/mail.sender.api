@@ -15,18 +15,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      initials: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      top: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      color: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
