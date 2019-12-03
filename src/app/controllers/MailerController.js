@@ -10,10 +10,8 @@ class MailerController {
   async store(req, res) {
     const schema = Yup.object().shape({
       sender_id: Yup.number().required(),
-      subject: Yup.string()
-        .required()
-        .min(16),
-      htmlbody: Yup.string().required(),
+      subject: Yup.string().required(),
+      bodyurl: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -22,7 +20,7 @@ class MailerController {
 
     const author_id = req.userId;
 
-    const { id, sender_id, subject, recipients, htmlbody } = req.body;
+    const { id, sender_id, subject, recipients, bodyurl } = req.body;
 
     const sender = await Sender.findByPk(sender_id);
 
@@ -32,14 +30,14 @@ class MailerController {
 
     await request(
       {
-        uri: htmlbody,
+        uri: bodyurl,
       },
       (error, response, body) => {
         Queue.add(SendMail.key, {
           sender,
           recipients,
           subject,
-          htmlbody: body,
+          bodyurl: body,
         });
       }
     );
@@ -50,7 +48,7 @@ class MailerController {
       subject,
       author_id,
       recipients,
-      htmlbody,
+      bodyurl,
     });
 
     return res.json({
@@ -59,7 +57,7 @@ class MailerController {
       subject,
       author_id,
       recipients,
-      htmlbody,
+      bodyurl,
     });
   }
 
@@ -70,7 +68,7 @@ class MailerController {
         'sender_id',
         'recipients',
         'subject',
-        'htmlbody',
+        'bodyurl',
         'author_id',
       ],
     });
@@ -93,7 +91,7 @@ class MailerController {
         'sender_id',
         'recipients',
         'subject',
-        'htmlbody',
+        'bodyurl',
         'author_id',
       ],
     });
