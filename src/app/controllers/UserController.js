@@ -13,9 +13,7 @@ class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
-      email: Yup.string()
-        .email()
-        .required(),
+      email: Yup.string().required(),
       password: Yup.string()
         .required()
         .min(6),
