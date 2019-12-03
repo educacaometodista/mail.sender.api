@@ -6,7 +6,7 @@ class SendMail {
   }
 
   async handle({ data }) {
-    const { sender, recipients, subject, body } = data;
+    const { sender, recipients, subject, htmlbody } = data;
 
     await Mail.sendMail({
       // to: `${sender.name} <${sender.email}>`,
@@ -15,7 +15,7 @@ class SendMail {
       // bcc: recipients,
       subject,
       template: 'template',
-      html: body,
+      html: htmlbody,
     });
   }
 }
