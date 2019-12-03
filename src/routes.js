@@ -25,5 +25,6 @@ routes.get('/senders', SenderController.index);
 
 routes.post('/mail', MailerController.store);
 routes.get('/mail', MailerController.index);
+routes.delete('/mail/:id', MailerController.delete);
 
 export default routes;
