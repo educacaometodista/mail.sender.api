@@ -23,18 +23,6 @@ class MailerController {
 
     const { id, sender_id, subject, recipients } = req.body;
 
-    const {
-      firstContent,
-      secondContent,
-      thirdContent,
-      fourthContent,
-      fifthContent,
-      sixthContent,
-    } = req.body;
-
-    const body = `${firstContent || ''} ${secondContent || ''} ${thirdContent ||
-      ''} ${fourthContent || ''} ${fifthContent || ''} ${sixthContent || ''}`;
-
     // const recipients = req.body.recipients.split(/, ;/g).map(r => `<${r}>,`);
 
     const sender = await Sender.findByPk(sender_id);
@@ -43,23 +31,14 @@ class MailerController {
       return res.status(400).json({ error: 'Remetente não encontrado' });
     }
 
-    const { title, subtitle, color, ctaText, ctaUrl } = req.body;
+    const { color, body } = req.body;
 
     await Queue.add(SendMail.key, {
       sender,
       recipients,
       subject,
-      title,
-      subtitle,
       color,
-      ctaText,
-      ctaUrl,
-      firstContent,
-      secondContent,
-      thirdContent,
-      fourthContent,
-      fifthContent,
-      sixthContent,
+      body,
     });
 
     await Mailer.create({
@@ -75,7 +54,6 @@ class MailerController {
       id,
       sender_id,
       subject,
-      body,
       author_id,
     });
   }
