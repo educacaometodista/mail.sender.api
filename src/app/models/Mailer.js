@@ -5,7 +5,7 @@ class Mailer extends Model {
     super.init(
       {
         subject: Sequelize.STRING,
-        body: Sequelize.TEXT,
+        htmlbody: Sequelize.TEXT,
         recipients: Sequelize.STRING,
       },
       {
