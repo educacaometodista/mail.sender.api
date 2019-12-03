@@ -18,7 +18,7 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: true,
       },
-      htmlbody: {
+      bodyurl: {
         type: Sequelize.TEXT,
         allowNull: false,
       },

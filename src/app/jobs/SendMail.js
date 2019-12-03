@@ -6,16 +6,16 @@ class SendMail {
   }
 
   async handle({ data }) {
-    const { sender, recipients, subject, htmlbody } = data;
+    const { sender, recipients, subject, bodyurl } = data;
 
     await Mail.sendMail({
-      // to: `${sender.name} <${sender.email}>`,
-      to: recipients,
+      to: `${sender.name} <${sender.email}>`,
+      // to: recipients,
       from: `${sender.name} <${sender.email}>`,
-      // bcc: recipients,
+      bcc: recipients,
       subject,
       template: 'template',
-      html: htmlbody,
+      html: bodyurl,
     });
   }
 }
