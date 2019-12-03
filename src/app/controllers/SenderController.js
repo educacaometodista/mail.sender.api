@@ -8,14 +8,13 @@ class SenderController {
       email: Yup.string()
         .email()
         .required(),
-      initials: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(401).json({ error: 'Falha na validação' });
     }
 
-    const { name, email, initials } = req.body;
+    const { name, email } = req.body;
 
     const senderExists = await Sender.findOne({
       where: { email },
@@ -28,13 +27,11 @@ class SenderController {
     await Sender.create({
       name,
       email,
-      initials,
     });
 
     return res.json({
       name,
       email,
-      initials,
     });
   }
 
@@ -42,7 +39,6 @@ class SenderController {
     const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email(),
-      initials: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -51,7 +47,7 @@ class SenderController {
 
     const sender = await Sender.findOne({
       where: { id: req.params.id },
-      attributes: ['id', 'name', 'email', 'initials'],
+      attributes: ['id', 'name', 'email'],
     });
 
     if (!sender) {
@@ -83,7 +79,7 @@ class SenderController {
 
   async index(req, res) {
     const sender = await Sender.findAll({
-      attributes: ['id', 'name', 'email', 'initials'],
+      attributes: ['id', 'name', 'email'],
     });
 
     return res.json(sender);
