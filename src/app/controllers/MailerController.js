@@ -77,6 +77,29 @@ class MailerController {
 
     return res.json(mailers);
   }
+
+  async delete(req, res) {
+    const mailer = await Mailer.findByPk(req.params.id);
+
+    if (!mailer) {
+      return res.status(401).json({ error: 'E-mail não encontrado.' });
+    }
+
+    await mailer.destroy();
+
+    const allMailers = await Mailer.findAll({
+      attributes: [
+        'id',
+        'sender_id',
+        'recipients',
+        'subject',
+        'htmlbody',
+        'author_id',
+      ],
+    });
+
+    return res.json(allMailers);
+  }
 }
 
 export default new MailerController();
