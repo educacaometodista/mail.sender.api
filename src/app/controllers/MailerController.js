@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import request from 'request';
 import Mailer from '../models/Mailer';
 import Sender from '../models/Sender';
 
@@ -12,7 +13,7 @@ class MailerController {
       subject: Yup.string()
         .required()
         .min(16),
-      htmlbody: Yup.string().max(9999),
+      htmlbody: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -21,7 +22,7 @@ class MailerController {
 
     const author_id = req.userId;
 
-    const { id, sender_id, subject, recipients } = req.body;
+    const { id, sender_id, subject, recipients, htmlbody } = req.body;
 
     const sender = await Sender.findByPk(sender_id);
 
@@ -29,23 +30,27 @@ class MailerController {
       return res.status(400).json({ error: 'Remetente não encontrado' });
     }
 
-    const { color, htmlbody } = req.body;
-
-    await Queue.add(SendMail.key, {
-      sender,
-      recipients,
-      subject,
-      color,
-      htmlbody,
-    });
+    await request(
+      {
+        uri: htmlbody,
+      },
+      (error, response, body) => {
+        Queue.add(SendMail.key, {
+          sender,
+          recipients,
+          subject,
+          htmlbody: body,
+        });
+      }
+    );
 
     await Mailer.create({
       id,
       sender_id,
       subject,
-      htmlbody,
       author_id,
       recipients,
+      htmlbody,
     });
 
     return res.json({
@@ -53,6 +58,8 @@ class MailerController {
       sender_id,
       subject,
       author_id,
+      recipients,
+      htmlbody,
     });
   }
 }
