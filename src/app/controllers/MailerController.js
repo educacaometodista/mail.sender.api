@@ -62,6 +62,21 @@ class MailerController {
       htmlbody,
     });
   }
+
+  async index(req, res) {
+    const mailers = await Mailer.findAll({
+      attributes: [
+        'id',
+        'sender_id',
+        'recipients',
+        'subject',
+        'htmlbody',
+        'author_id',
+      ],
+    });
+
+    return res.json(mailers);
+  }
 }
 
 export default new MailerController();
