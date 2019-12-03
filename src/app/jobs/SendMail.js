@@ -6,21 +6,7 @@ class SendMail {
   }
 
   async handle({ data }) {
-    const {
-      sender,
-      recipients,
-      subject,
-      title,
-      subtitle,
-      ctaText,
-      ctaUrl,
-      firstContent,
-      secondContent,
-      thirdContent,
-      fourthContent,
-      fifthContent,
-      sixthContent,
-    } = data;
+    const { sender, recipients, subject, body } = data;
 
     await Mail.sendMail({
       // to: `${sender.name} <${sender.email}>`,
@@ -29,20 +15,7 @@ class SendMail {
       // bcc: recipients,
       subject,
       template: 'template',
-      context: {
-        title,
-        subtitle,
-        topImage: sender.top,
-        firstContent,
-        secondContent,
-        thirdContent,
-        fourthContent,
-        fifthContent,
-        sixthContent,
-        color: sender.color,
-        ctaText,
-        ctaUrl,
-      },
+      html: body,
     });
   }
 }
