@@ -62,7 +62,12 @@ class MailerController {
   }
 
   async index(req, res) {
+    const { page = 1 } = req.query;
+
     const mailers = await Mailer.findAll({
+      order: [['createdAt', 'DESC']],
+      limit: 6,
+      offset: (page - 1) * 6,
       attributes: [
         'id',
         'sender_id',
@@ -70,6 +75,7 @@ class MailerController {
         'subject',
         'bodyurl',
         'author_id',
+        'createdAt',
       ],
     });
 
