@@ -10,7 +10,6 @@ class SendMail {
 
     await Mail.sendMail({
       to: `${sender.name} <${sender.email}>`,
-      // to: recipients,
       from: `${sender.name} <${sender.email}>`,
       bcc: recipients,
       subject,
