@@ -5,13 +5,13 @@ import SessionController from './app/controllers/SessionController';
 import SenderController from './app/controllers/SenderController';
 import MailerController from './app/controllers/MailerController';
 
-// import authMiddleware from './app/middlewares/auth';
+import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 
 routes.post('/login', SessionController.store);
 
-// routes.use(authMiddleware);
+routes.use(authMiddleware);
 
 routes.post('/users', UserController.store);
 routes.put('/users/:id', UserController.update);
