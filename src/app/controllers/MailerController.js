@@ -18,9 +18,7 @@ class MailerController {
       return res.status(401).json({ error: 'Erro na validação.' });
     }
 
-    const author_id = req.userId;
-
-    const { id, sender_id, subject, recipients, bodyurl } = req.body;
+    const { id, sender_id, subject, recipients, bodyurl, author_id } = req.body;
 
     const sender = await Sender.findByPk(sender_id);
 
