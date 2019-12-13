@@ -76,8 +76,13 @@ class SenderController {
   }
 
   async index(req, res) {
+    const { page = 1 } = req.query;
+
     const sender = await Sender.findAll({
       attributes: ['id', 'name', 'email'],
+      order: [['createdAt', 'DESC']],
+      limit: 6,
+      offset: (page - 1) * 6,
     });
 
     return res.json(sender);
