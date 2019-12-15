@@ -64,8 +64,8 @@ class MailerController {
 
     const mailers = await Mailer.findAll({
       order: [['createdAt', 'DESC']],
-      limit: 6,
-      offset: (page - 1) * 6,
+      limit: 10,
+      offset: (page - 1) * 10,
       attributes: [
         'id',
         'sender_id',
