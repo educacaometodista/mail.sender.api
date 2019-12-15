@@ -8,11 +8,11 @@ module.exports = {
         {
           id: 1,
           name: 'Leonardo Almeida',
-          email: process.env.LEONARDO_MAIL,
+          email: 'leonardo.almeida@metodista.br',
           password_hash: bcrypt.hashSync(
             process.env.NODE_ENV === 'development'
               ? 'admin'
-              : process.env.FERNANDO_PASS,
+              : process.env.LEONARDO_PASS,
             8
           ),
           avatar_url:
@@ -23,11 +23,11 @@ module.exports = {
         {
           id: 2,
           name: 'Erick Firmo',
-          email: process.env.ERICK_MAIL,
+          email: 'erick.serrano@metodista.br',
           password_hash: bcrypt.hashSync(
             process.env.NODE_ENV === 'development'
               ? 'admin'
-              : process.env.FERNANDO_PASS,
+              : process.env.ERICK_PASS,
             8
           ),
           avatar_url:
@@ -38,11 +38,11 @@ module.exports = {
         {
           id: 3,
           name: 'Thiago Tamosauskas',
-          email: process.env.THIAGO_MAIL,
+          email: 'thiago.tamosauskas@metodista.br',
           password_hash: bcrypt.hashSync(
             process.env.NODE_ENV === 'development'
               ? 'admin'
-              : process.env.FERNANDO_PASS,
+              : process.env.THIAGO_PASS,
             8
           ),
           avatar_url:
@@ -53,7 +53,7 @@ module.exports = {
         {
           id: 4,
           name: 'Fernando Zancopé',
-          email: process.env.FERNANDO_MAIL,
+          email: 'fernando.zancope@metodista.br',
           password_hash: bcrypt.hashSync(
             process.env.NODE_ENV === 'development'
               ? 'admin'
