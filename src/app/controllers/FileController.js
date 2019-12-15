@@ -4,12 +4,23 @@ class FileController {
   async store(req, res) {
     const { originalname: name, filename: path } = req.file;
 
+    const { declaration } = req.body;
+
     const file = await File.create({
       name,
       path,
+      declaration,
     });
 
     return res.json(file);
+  }
+
+  async index(req, res) {
+    const files = await File.findAll({
+      attributes: ['id', 'url', 'name', 'declaration', 'createdAt'],
+    });
+
+    return res.json(files);
   }
 }
 

@@ -7,6 +7,7 @@ import SessionController from './app/controllers/SessionController';
 import SenderController from './app/controllers/SenderController';
 import MailerController from './app/controllers/MailerController';
 import FileController from './app/controllers/FileController';
+import ConvertFileController from './app/controllers/ConvertFileController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -32,5 +33,8 @@ routes.get('/mail', MailerController.index);
 routes.delete('/mail/:id', MailerController.delete);
 
 routes.post('/files', upload.single('file'), FileController.store);
+routes.get('/files', FileController.index);
+
+routes.post('/files/convert', ConvertFileController.index);
 
 export default routes;
