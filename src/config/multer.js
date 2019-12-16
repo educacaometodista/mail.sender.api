@@ -15,8 +15,8 @@ export default {
   }),
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    if (ext !== '.xls' && ext !== '.xlsx' && ext !== '.csv' && ext !== '.txt') {
-      return cb(new Error('Only data files are allowed.'));
+    if (ext !== '.xls') {
+      return cb(new Error('Only .xls files are allowed.'));
     }
     return cb(null, true);
   },
