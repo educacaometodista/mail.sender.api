@@ -80,7 +80,7 @@ class SenderController {
 
     const sender = await Sender.findAll({
       attributes: ['id', 'name', 'email'],
-      order: [['createdAt', 'DESC']],
+      order: [['createdAt', 'ASC']],
       limit: 6,
       offset: (page - 1) * 6,
     });
