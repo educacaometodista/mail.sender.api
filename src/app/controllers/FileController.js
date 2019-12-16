@@ -17,7 +17,7 @@ class FileController {
 
   async index(req, res) {
     const files = await File.findAll({
-      attributes: ['id', 'url', 'name', 'declaration', 'createdAt'],
+      attributes: ['id', 'url', 'name', 'declaration', 'path', 'createdAt'],
     });
 
     return res.json(files);
