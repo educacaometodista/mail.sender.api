@@ -16,12 +16,7 @@ class ConvertFileController {
         'uploads',
         filename
       ),
-      sheets: [
-        {
-          name: 'Sheet1',
-        },
-      ],
-      columnToKey: { A: 'email', B: 'nome' },
+      columnToKey: { A: 'email' },
     });
 
     return res.json(excel);
