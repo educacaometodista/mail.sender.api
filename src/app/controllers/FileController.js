@@ -16,8 +16,13 @@ class FileController {
   }
 
   async index(req, res) {
+    const { page = 1 } = req.query;
+
     const files = await File.findAll({
       attributes: ['id', 'url', 'name', 'declaration', 'path', 'createdAt'],
+      order: [['createdAt', 'DESC']],
+      limit: 10,
+      offset: (page - 1) * 10,
     });
 
     return res.json(files);
