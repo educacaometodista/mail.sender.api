@@ -1,9 +1,8 @@
 import excelToJson from 'convert-excel-to-json';
-
 import path from 'path';
 
 class ConvertFileController {
-  async index(req, res) {
+  async store(req, res) {
     const { filename } = req.body;
 
     const excel = await excelToJson({
@@ -19,7 +18,13 @@ class ConvertFileController {
       columnToKey: { A: 'email' },
     });
 
-    return res.json(excel);
+    const key = excel[Object.keys(excel)[0]];
+
+    const recipients = [...new Set(key.map(k => k.email))];
+
+    recipients.shift();
+
+    return res.json(recipients.join(', ').toLowerCase());
   }
 }
 
