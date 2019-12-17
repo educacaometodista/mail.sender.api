@@ -26,27 +26,45 @@ class MailerController {
       return res.status(400).json({ error: 'Remetente não encontrado' });
     }
 
-    await request(
-      {
-        uri: bodyurl,
-      },
-      (error, response, body) => {
-        Queue.add(SendMail.key, {
-          sender,
-          recipients,
-          subject,
-          bodyurl: body,
-        });
-      }
-    );
+    const arr = recipients.split(',');
 
-    await Mailer.create({
-      id,
-      sender_id,
-      subject,
-      author_id,
-      recipients,
-      bodyurl,
+    function chunkArray(myArray, chunkSize) {
+      let index = 0;
+      const arrayLength = myArray.length;
+      const tempArray = [];
+
+      for (index = 0; index < arrayLength; index += chunkSize) {
+        const myChunk = myArray.slice(index, index + chunkSize);
+        tempArray.push(myChunk);
+      }
+
+      return tempArray;
+    }
+    const result = chunkArray(arr, 499);
+
+    result.map(async r => {
+      await request(
+        {
+          uri: bodyurl,
+        },
+        (error, response, body) => {
+          Queue.add(SendMail.key, {
+            sender,
+            recipients: r,
+            subject,
+            bodyurl: body,
+          });
+        }
+      );
+
+      await Mailer.create({
+        id,
+        sender_id,
+        subject,
+        author_id,
+        recipients,
+        bodyurl,
+      });
     });
 
     return res.json({
