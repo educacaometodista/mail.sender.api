@@ -14,6 +14,7 @@ class UserController {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string().required(),
+      avatar_url: Yup.string(),
       password: Yup.string()
         .required()
         .min(6),
@@ -33,12 +34,13 @@ class UserController {
         .json({ error: 'Um usuário com este e-mail já existe.' });
     }
 
-    const { id, name, email } = await User.create(req.body);
+    const { id, name, email, avatar_url } = await User.create(req.body);
 
     return res.json({
       id,
       name,
       email,
+      avatar_url
     });
   }
 
