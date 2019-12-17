@@ -35,6 +35,6 @@ routes.delete('/mail/:id', MailerController.delete);
 routes.post('/files', upload.single('file'), FileController.store);
 routes.get('/files', FileController.index);
 
-routes.post('/files/convert', ConvertFileController.index);
+routes.post('/files/convert', ConvertFileController.store);
 
 export default routes;
