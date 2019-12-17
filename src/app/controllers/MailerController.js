@@ -56,15 +56,15 @@ class MailerController {
           });
         }
       );
+    });
 
-      await Mailer.create({
-        id,
-        sender_id,
-        subject,
-        author_id,
-        recipients,
-        bodyurl,
-      });
+    await Mailer.create({
+      id,
+      sender_id,
+      subject,
+      author_id,
+      recipients,
+      bodyurl,
     });
 
     return res.json({
