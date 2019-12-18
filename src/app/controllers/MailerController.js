@@ -50,7 +50,7 @@ class MailerController {
         (error, response, body) => {
           Queue.add(SendMail.key, {
             sender,
-            recipients: r,
+            recipients: r.join().replace(',', ', '),
             subject,
             bodyurl: body,
           });
