@@ -39,6 +39,7 @@ routes.get('/files', FileController.index);
 routes.post('/files/convert', ConvertFileController.store);
 
 routes.get('/reports/filter/:month', ReportsController.index);
-routes.get('/reports/fifteen', ReportsController.fifteenDays);
+routes.get('/reports/interval/:time', ReportsController.defineDaysAgo);
+routes.get('/reports/total', ReportsController.totalIndex);
 
 export default routes;
