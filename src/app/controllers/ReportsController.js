@@ -1,4 +1,6 @@
-import { getMonth } from 'date-fns';
+import { subDays, getMonth } from 'date-fns';
+
+import { Op } from 'sequelize';
 
 import Mailer from '../models/Mailer';
 
@@ -15,10 +17,31 @@ class ReportsController {
     return res.json(monthly);
   }
 
-  async fifteenDays(req, res) {
-    const actualMonth = new Date();
+  async defineDaysAgo(req, res) {
+    const { time } = req.params;
+    const { page = 1 } = req.query;
 
-    return res.json(actualMonth);
+    const daysAgo = subDays(new Date(), time);
+
+    const mails = await Mailer.findAll({
+      where: {
+        createdAt: {
+          [Op.lt]: new Date(),
+          [Op.gt]: daysAgo,
+        },
+      },
+      order: [['createdAt', 'DESC']],
+      limit: 10,
+      offset: (page - 1) * 10,
+    });
+
+    return res.json(mails);
+  }
+
+  async totalIndex(req, res) {
+    const mails = await Mailer.findAll();
+
+    return res.json(mails);
   }
 }
 
