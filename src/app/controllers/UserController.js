@@ -5,6 +5,7 @@ class UserController {
   async index(req, res) {
     const users = await User.findAll({
       attributes: ['id', 'name', 'email', 'avatar_url'],
+      order: [['id', 'ASC']],
     });
 
     return res.json(users);
@@ -40,7 +41,7 @@ class UserController {
       id,
       name,
       email,
-      avatar_url
+      avatar_url,
     });
   }
 
