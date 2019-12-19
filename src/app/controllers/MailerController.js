@@ -1,6 +1,8 @@
 /* eslint-disable no-restricted-syntax */
 import * as Yup from 'yup';
 import request from 'request';
+import schedule from 'node-schedule';
+import { addDays } from 'date-fns';
 import Mailer from '../models/Mailer';
 import Sender from '../models/Sender';
 
@@ -13,13 +15,28 @@ class MailerController {
       sender_id: Yup.number().required(),
       subject: Yup.string().required(),
       bodyurl: Yup.string().required(),
+      date: Yup.date(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(401).json({ error: 'Erro na validação.' });
     }
 
-    const { id, sender_id, subject, recipients, bodyurl, author_id } = req.body;
+    const {
+      id,
+      sender_id,
+      subject,
+      recipients,
+      bodyurl,
+      author_id,
+      date,
+    } = req.body;
+
+    const dateIsValid = date !== undefined;
+
+    if (!dateIsValid) {
+      return res.status(401).json({ error: 'Data inválida.' });
+    }
 
     const sender = await Sender.findByPk(sender_id);
 
@@ -43,21 +60,43 @@ class MailerController {
     }
     const arrayMax = chunkArray(arr, 499);
 
-    for (const index in arrayMax) {
-      if (Object.prototype.hasOwnProperty.call(arrayMax, index)) {
-        request(
-          {
-            uri: bodyurl,
-          },
-          (_error, _response, body) => {
-            Queue.add(SendMail.key, {
-              sender,
-              recipients: arrayMax[index].join().replace(',', ', '),
-              subject,
-              bodyurl: body,
-            });
+    if (dateIsValid && date > new Date()) {
+      schedule.scheduleJob(date, () => {
+        for (const index in arrayMax) {
+          if (Object.prototype.hasOwnProperty.call(arrayMax, index)) {
+            request(
+              {
+                uri: bodyurl,
+              },
+              (_error, _response, body) => {
+                Queue.add(SendMail.key, {
+                  sender,
+                  recipients: arrayMax[index].join().replace(',', ', '),
+                  subject,
+                  bodyurl: body,
+                });
+              }
+            );
           }
-        );
+        }
+      });
+    } else {
+      for (const index in arrayMax) {
+        if (Object.prototype.hasOwnProperty.call(arrayMax, index)) {
+          request(
+            {
+              uri: bodyurl,
+            },
+            (_error, _response, body) => {
+              Queue.add(SendMail.key, {
+                sender,
+                recipients: arrayMax[index].join().replace(',', ', '),
+                subject,
+                bodyurl: body,
+              });
+            }
+          );
+        }
       }
     }
 
@@ -68,6 +107,7 @@ class MailerController {
       author_id,
       recipients,
       bodyurl,
+      createdAt: dateIsValid && date !== null ? date : new Date(),
     });
 
     return res.json({
