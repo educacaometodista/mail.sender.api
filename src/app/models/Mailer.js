@@ -7,6 +7,7 @@ class Mailer extends Model {
         subject: Sequelize.STRING,
         bodyurl: Sequelize.TEXT,
         recipients: Sequelize.STRING,
+        date: Sequelize.VIRTUAL,
       },
       {
         sequelize,
