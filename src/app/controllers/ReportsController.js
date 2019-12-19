@@ -1,5 +1,4 @@
 import { subDays, getMonth } from 'date-fns';
-
 import { Op } from 'sequelize';
 
 import Mailer from '../models/Mailer';
