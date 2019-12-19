@@ -8,6 +8,7 @@ import SenderController from './app/controllers/SenderController';
 import MailerController from './app/controllers/MailerController';
 import FileController from './app/controllers/FileController';
 import ConvertFileController from './app/controllers/ConvertFileController';
+import ReportsController from './app/controllers/ReportsController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -36,5 +37,9 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.get('/files', FileController.index);
 
 routes.post('/files/convert', ConvertFileController.store);
+
+routes.get('/reports/filter/:month', ReportsController.index);
+routes.get('/reports/interval/:time', ReportsController.defineDaysAgo);
+routes.get('/reports/total', ReportsController.totalIndex);
 
 export default routes;
