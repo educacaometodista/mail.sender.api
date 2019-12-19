@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import * as Yup from 'yup';
 import request from 'request';
 import Mailer from '../models/Mailer';
@@ -42,21 +43,23 @@ class MailerController {
     }
     const result = chunkArray(arr, 499);
 
-    result.map(async r => {
-      await request(
-        {
-          uri: bodyurl,
-        },
-        (error, response, body) => {
-          Queue.add(SendMail.key, {
-            sender,
-            recipients: r.join().replace(',', ', '),
-            subject,
-            bodyurl: body,
-          });
-        }
-      );
-    });
+    for (const prop in result) {
+      if (Object.prototype.hasOwnProperty.call(result, prop)) {
+        request(
+          {
+            uri: bodyurl,
+          },
+          (_error, _response, body) => {
+            Queue.add(SendMail.key, {
+              sender,
+              recipients: result[prop].join().replace(',', ', '),
+              subject,
+              bodyurl: body,
+            });
+          }
+        );
+      }
+    }
 
     await Mailer.create({
       id,
