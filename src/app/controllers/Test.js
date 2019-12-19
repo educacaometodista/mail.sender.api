@@ -6062,7 +6062,7 @@ const obj = { a: 1, b: 2, c: 3 };
 for (const prop in result) {
   // ctrl+shift+k (para abrir o console no mozilla firefox)
   console.log(
-    result[1]
+    result[prop]
       .join()
       .replace('.br', '.br,')
       .replace(',,', ',')
