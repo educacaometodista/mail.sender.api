@@ -6059,12 +6059,12 @@ const result = chunkArray(arr, 3);
 const obj = { a: 1, b: 2, c: 3 };
 
 // Para prop (propriedade) in obj (objeto) faça
-for (const prop in result) {
-  // ctrl+shift+k (para abrir o console no mozilla firefox)
-  console.log(
-    result[prop]
-      .join()
-      .replace('.br', '.br,')
-      .replace(',,', ',')
-  );
+// for (const prop in result) {
+//   // ctrl+shift+k (para abrir o console no mozilla firefox)
+//   console.log(
+//     result[prop]
+//       .join()
+//       .replace('.br', '.br,')
+//       .replace(',,', ',')
+//   );
 }
