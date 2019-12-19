@@ -41,10 +41,10 @@ class MailerController {
 
       return tempArray;
     }
-    const result = chunkArray(arr, 499);
+    const arrayMax = chunkArray(arr, 499);
 
-    for (const prop in result) {
-      if (Object.prototype.hasOwnProperty.call(result, prop)) {
+    for (const index in arrayMax) {
+      if (Object.prototype.hasOwnProperty.call(arrayMax, index)) {
         request(
           {
             uri: bodyurl,
@@ -52,7 +52,7 @@ class MailerController {
           (_error, _response, body) => {
             Queue.add(SendMail.key, {
               sender,
-              recipients: result[prop].join().replace(',', ', '),
+              recipients: arrayMax[index].join().replace(',', ', '),
               subject,
               bodyurl: body,
             });
