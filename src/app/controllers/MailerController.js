@@ -2,7 +2,6 @@
 import * as Yup from 'yup';
 import request from 'request';
 import schedule from 'node-schedule';
-import { addDays } from 'date-fns';
 import Mailer from '../models/Mailer';
 import Sender from '../models/Sender';
 
