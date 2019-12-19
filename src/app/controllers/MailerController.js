@@ -108,7 +108,7 @@ class MailerController {
       author_id,
       recipients,
       bodyurl,
-      updatedAt: dateIsValid && date !== null ? date : new Date(),
+      createdAt: dateIsValid && date !== null ? date : new Date(),
     });
 
     return res.json({
