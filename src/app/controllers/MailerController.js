@@ -14,7 +14,9 @@ class MailerController {
       sender_id: Yup.number().required(),
       subject: Yup.string().required(),
       bodyurl: Yup.string().required(),
-      date: Yup.date(),
+      recipients: Yup.string().required(),
+      author_id: Yup.number().required(),
+      date: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -59,7 +61,7 @@ class MailerController {
     }
     const arrayMax = chunkArray(arr, 499);
 
-    if (dateIsValid && date > new Date()) {
+    if (dateIsValid && new Date(date) > new Date()) {
       schedule.scheduleJob(date, () => {
         for (const index in arrayMax) {
           if (Object.prototype.hasOwnProperty.call(arrayMax, index)) {
