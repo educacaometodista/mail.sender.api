@@ -6045,13 +6045,26 @@ function chunkArray(myArray, chunkSize) {
 
   return tempArray;
 }
-const result = chunkArray(arr, 499);
+const result = chunkArray(arr, 3);
 
-result.map(async r => {
+// result.map(async r => {
+//   console.log(
+//     r
+//       .join()
+//       .replace('.br', '.br,')
+//       .replace(',,', ',')
+//   );
+// });
+
+const obj = { a: 1, b: 2, c: 3 };
+
+// Para prop (propriedade) in obj (objeto) faça
+for (const prop in result) {
+  // ctrl+shift+k (para abrir o console no mozilla firefox)
   console.log(
-    r
+    result[1]
       .join()
       .replace('.br', '.br,')
       .replace(',,', ',')
   );
-});
+}
