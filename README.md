@@ -7,7 +7,7 @@
 </h3>
 
 <blockquote align="center">
-A Rest API of the email triggering tool made by <a href="https://github.com/LeuAlmeida">Léu Almeida</a> for <a href="https://github.com/educacaometodista"><strong>@educacaometodista</strong></a>
+A Rest API of the email triggering tool made by <a href="https://github.com/LeuAlmeida"><strong>Léu Almeida</strong></a> for <a href="https://github.com/educacaometodista"><strong>@educacaometodista</strong></a>
 </blockquote>
 
 <p align="center">
