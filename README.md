@@ -11,7 +11,7 @@ A Rest API of the email triggering tool made by <a href="https://github.com/LeuA
 </blockquote>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/LeuAlmeida/devfit.backend?color=%2304D361">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/LeuAlmeida/mail.sender.api?color=%2304D361">
 
   <a href="https://rocketseat.com.br">
     <img alt="Made by Léu Almeida" src="https://img.shields.io/badge/made%20by-Léu%20Almeida-%2304D361">
