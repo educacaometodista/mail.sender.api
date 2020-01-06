@@ -1,6 +1,6 @@
-<!-- <h1 align="center">
-  <img alt="Devfit" title="Devfit" src="readme/logo-black.png" width="200px" />
-</h1> -->
+<p align="center">
+  <img src="http://educacaometodista.org.br/++theme++novo-logo-rede/img/lrm.png" width="120">
+</p>
 
 <h3 align="center">
   Mail Sender: API Rest :key:
@@ -23,21 +23,24 @@ A Rest API of the email triggering tool made by <a href="https://github.com/LeuA
 
 <hr/>
 
-<!-- <h3>:heavy_check_mark: Stack</h3>
+<h3>:heavy_check_mark: Stack</h3>
 
 |       Dependencies            |     Security and Prevent errors   |
 |-------------------------------|:---------------------------------:|
 |       Nodemon                 |     Bcrypt                        |
 |       Bee-queue               |     Dotenv                        |
-|       Express Handlebars      |     Express-async-errors          |
+|       Convert Excel to Json   |     CORS                          |
 |       Pg and pg-hstore        |     JWT                           |
 |       Sequelize               |     Sentry                        |
-|       Express Handlebars      |     Youch                         |
-|                               |     Yup                           | -->
+|       Crypto                  |     Youch                         |
+|       Express                 |     Yup                           |
+|       Multer                  |     Path                          |
+|       Node-schedule           |                                   |
 
 <h3>:white_check_mark: About the API</h3>
 
-Incoming...
+With this API you can make secure and fast email triggers with Nodemailer. The session control is done via JWT and queues are maintained with Redis and Bee Queue. The database used is PostgreSQL for relational information control.<br/>
+<a href="https://github.com/LeuAlmeida/mail.sender">:mailbox: Check out the Front End application developed for this application.</a>
 
 <h3>:electric_plug: Preparing the server</h3>
 
