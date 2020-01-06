@@ -39,7 +39,7 @@ A Rest API of the email triggering tool made by <a href="https://github.com/LeuA
 
 <h3>:white_check_mark: About the API</h3>
 
-With this API you can make secure and fast email triggers with Nodemailer. The session control is done via JWT and queues are maintained with Redis and Bee Queue. The database used is PostgreSQL for relational information control.
+With this API you can make secure and fast email triggers with Nodemailer. The session control is done via JWT and queues are maintained with Redis and Bee Queue. The database used is PostgreSQL for relational information control.<br/>
 <a href="https://github.com/LeuAlmeida/mail.sender">:mailbox: Check out the Front End application developed for this application.</a>
 
 <h3>:electric_plug: Preparing the server</h3>
