@@ -16,7 +16,6 @@ class MailerController {
       bodyurl: Yup.string().required(),
       recipients: Yup.string().required(),
       author_id: Yup.number().required(),
-      date: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
