@@ -8,4 +8,4 @@ RUN yarn
 COPY . .
 
 EXPOSE 3333
-CMD ["yarn", "dev" ; "yarn", "queue"]
+CMD yarn dev ; yarn queue
